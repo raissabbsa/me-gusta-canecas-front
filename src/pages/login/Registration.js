@@ -2,8 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
-export default function Login() {
-    const [form,setForm] = useState({email:"", password:""})
+export default function Registration(){
+    const [form,setForm] = useState({name:"", email:"", password:""})
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
@@ -11,19 +11,26 @@ export default function Login() {
         setForm({...form, [e.target.name]:e.target.value})
     }
 
-    function login(e){
+    function register(e){
         e.preventDefault()
         setLoading(true)
         console.log(form)
     }
-    return (
-        <ContainerLogin>
+    return(
+        <Container>
             <Top>
                 <ion-icon name="cafe-outline"></ion-icon>
                 Me gusta Canecas
             </Top>
-            <form onSubmit={login}>
-                <input placeholder="email"
+            <form onSubmit={register}>
+            <input placeholder="nome"
+                    type="name"
+                    name="name"
+                    value={form.name}
+                    onChange={fillForm}
+                    disabled={loading ? "disabled" : ""}
+                />
+            <input placeholder="email"
                     type="email"
                     name="email"
                     value={form.email}
@@ -37,13 +44,14 @@ export default function Login() {
                     onChange={fillForm}
                     disabled={loading ? "disabled" : ""}
                 />
-                <button type="submit">Entrar</button>
+                <button type="submit">Cadastrar</button>
             </form>
-            <p onClick={() => navigate("/cadastro")}>Não tem conta? Cadastre-se!</p>
-        </ContainerLogin>
+            <p onClick={() => navigate("/login")}>Já tem conta? Faça o login!</p>
+        </Container>
     )
 }
-const ContainerLogin = styled.div`
+
+const Container = styled.div`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -86,7 +94,7 @@ const ContainerLogin = styled.div`
 `
 const Top = styled.div`
     display: flex;
-    margin-bottom: 100px;
+    margin-bottom: 150px;
     align-items: center;
     justify-content: center;
     height: 70px;

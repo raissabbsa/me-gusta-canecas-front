@@ -1,18 +1,21 @@
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
 export default function Header(){
+    const navigate = useNavigate()
+
     return(
     <>
         <Top>
             <ion-icon name="list-outline"></ion-icon>
             <div>
-                <ion-icon name="cafe-outline"></ion-icon>
+            <ion-icon name="cafe-outline"></ion-icon>
                 <p>Me Gusta Canecas</p>
             </div>
             
         
             <div>
-                <ion-icon name="person-circle-outline"></ion-icon>
+                <ion-icon onClick={() => navigate("/login")} name="person-circle-outline"></ion-icon>
                 <ion-icon name="cart-outline"></ion-icon>
                 <ion-icon name="log-out-outline"></ion-icon>
             </div>
