@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainPage from "./pages/MainPage";
+import MainPage from "./pages/main/MainPage";
 import ResetStyle from "./styles/ResetStyle";
 
 export default function App(){
