@@ -1,10 +1,10 @@
 import styled from "styled-components"
 
-export default function Image({e}){
+export default function Image({p}){
     return(
         <Block>
-            <img src={e.link} alt={e.name}/>
-            <p>{e.name}</p>
+            <img src={p.imageLink} alt={p.name}/>
+            <p>{p.name}</p>
         </Block>
         
     )
