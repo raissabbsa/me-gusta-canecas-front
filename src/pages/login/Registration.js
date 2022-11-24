@@ -15,6 +15,7 @@ export default function Registration(){
         e.preventDefault()
         setLoading(true)
         console.log(form)
+        console.log("oi")
     }
     return(
         <Container>
