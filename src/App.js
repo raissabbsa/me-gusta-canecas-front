@@ -5,6 +5,7 @@ import Context from "./contexts/Context";
 import MainPage from "./pages/main/MainPage";
 import ResetStyle from "./styles/ResetStyle";
 import Registration from "./pages/login/Registration";
+import UserProvider from "./contexts/TokenContext"
 import Admin from "./pages/Admin/Admin";
 import AdminRegistration from "./pages/AdminRegistration/AdminRegistration";
 import AdminProducts from "./pages/AdminProducts/AdminProducts";
