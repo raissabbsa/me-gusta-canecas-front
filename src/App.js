@@ -12,8 +12,9 @@ import AdminProducts from "./pages/AdminProducts/AdminProducts";
 export default function App() {
   const [adminUserInfo, setAdminUserInfo] = useState({});
   const [adminConfig, setAdminConfig] = useState({});
+  const [products, setProducts] = useState([]);
   return (
-    <Context.Provider value={{ adminUserInfo, setAdminUserInfo, adminConfig, setAdminConfig }}>
+    <Context.Provider value={{ adminUserInfo, setAdminUserInfo, adminConfig, setAdminConfig, products, setProducts }}>
       <BrowserRouter>
         <ResetStyle />
         <Routes>
