@@ -21,7 +21,7 @@ export default function AdminProducts() {
   const { adminUserInfo } = useContext(Context);
   const { adminConfig } = useContext(Context);
 
-  /*   const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const promise = axios.get(`${URL}/products`, adminConfig);
@@ -33,7 +33,8 @@ export default function AdminProducts() {
     promise.catch((err) => {
       alert(err.response.data.message);
     });
-  }); */
+  }, [adminConfig]);
+
   function fillForm(e) {
     setAddProductForm({ ...addProductForm, [e.target.name]: e.target.value });
   }
@@ -69,8 +70,11 @@ export default function AdminProducts() {
   return (
     <Container>
       <AdminHeader />
-      <form onSubmit={addProductSubmit}>
+      <div>
         <h1>Acesso de Administrador</h1>
+        <p>Olá, {adminUserInfo.name}</p>
+      </div>
+      <form onSubmit={addProductSubmit}>
         <p>Cadastrar novo produto</p>
         <input
           type="text"
@@ -144,6 +148,14 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  h1 {
+    font-size: 25px;
+    margin-bottom: 5px;
+  }
+  p {
+    font-size: 17px;
+    margin-bottom: 20px;
+  }
   form {
     margin-top: 90px;
     width: 100%;
@@ -151,14 +163,6 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  h1{
-    font-size: 25px;
-    margin-bottom: 5px;
-  }
-  p {
-    font-size: 17px;
-    margin-bottom: 20px;
   }
   input {
     color: black;
@@ -170,26 +174,6 @@ const Container = styled.div`
     margin-bottom: 10px;
     padding: 15px;
     font-size: 20px;
-  }
-    p {
-    margin-top: 10px;
-    color: #2d799e;
-    cursor: pointer;
-  }
-`;
-const Top = styled.div`
-  display: flex;
-  margin-bottom: 30px;
-  align-items: center;
-  justify-content: center;
-  height: 70px;
-  width: 100%;
-  background-color: #2d799e;
-  font-family: "Patrick Hand", cursive;
-  font-size: 25px;
-  ion-icon {
-    margin-right: 10px;
-    font-size: 35px;
   }
 `;
 const Button = styled.button`
@@ -204,4 +188,3 @@ const Button = styled.button`
   font-size: 20px;
   margin-top: 10px;
 `;
-

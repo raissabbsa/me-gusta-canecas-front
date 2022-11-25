@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
 import Login from "./pages/login/Login";
 import Context from "./contexts/Context";
 import MainPage from "./pages/main/MainPage";
@@ -8,16 +7,14 @@ import Registration from "./pages/login/Registration";
 import Admin from "./pages/Admin/Admin";
 import AdminRegistration from "./pages/AdminRegistration/AdminRegistration";
 import AdminProducts from "./pages/AdminProducts/AdminProducts";
-import UserProvider from "./contexts/Token";
+import UserProvider from "./contexts/Context";
 import ImagePage from "./pages/main/ImagePage";
 
 export default function App() {
-  const [adminUserInfo, setAdminUserInfo] = useState({});
-  const [adminConfig, setAdminConfig] = useState({});
-  const [products, setProducts] = useState([]);
+ 
   return (
     <UserProvider>
-      <Context.Provider value={{ adminUserInfo, setAdminUserInfo, adminConfig, setAdminConfig, products, setProducts }}>
+      <Context.Provider UserProvider>
         <BrowserRouter>
           <ResetStyle />
           <Routes>
