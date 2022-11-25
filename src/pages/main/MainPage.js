@@ -13,18 +13,17 @@ export default function MainPage() {
     const promise = axios.get(`${URL}/products`);
     promise.then((res) => {
       setProducts(res.data);
-      console.log(res.data);
     });
     promise.catch((err) => {
       console.log(err);
     });
-  });
+  },[]);
 
   return (
     <>
       <Header />
       <Container>
-        {products.map((p) => (<Image key={p.id} image={p.imageLink} name={p.name} />))}
+        {products.map((p) => (<Image key={p._id} p={p} />))}
       </Container>
     </>
   );
@@ -35,7 +34,6 @@ const Container = styled.div`
   flex-wrap: wrap;
   width: 90%;
   margin: auto;
-
   display: flex;
   justify-content: center;
   align-items: center;
