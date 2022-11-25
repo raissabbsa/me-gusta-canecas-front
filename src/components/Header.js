@@ -7,6 +7,7 @@ export default function Header(){
     return(
     <Container>
         <Top>
+            <ion-icon onClick={() => navigate("/")} name="home-outline"></ion-icon>
             <div>
             <ion-icon name="cafe-outline"></ion-icon>
                 <p>Me Gusta Canecas</p>
