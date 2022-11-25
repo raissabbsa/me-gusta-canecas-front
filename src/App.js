@@ -5,7 +5,7 @@ import Context from "./contexts/Context";
 import MainPage from "./pages/main/MainPage";
 import ResetStyle from "./styles/ResetStyle";
 import Registration from "./pages/login/Registration";
-import UserProvider from "./contexts/TokenContext"
+import UserProvider from "./contexts/TokenContext";
 import Admin from "./pages/Admin/Admin";
 import AdminRegistration from "./pages/AdminRegistration/AdminRegistration";
 import AdminProducts from "./pages/AdminProducts/AdminProducts";
@@ -15,11 +15,21 @@ export default function App() {
   const [adminConfig, setAdminConfig] = useState({});
   const [products, setProducts] = useState([]);
   return (
-    <Context.Provider value={{ adminUserInfo, setAdminUserInfo, adminConfig, setAdminConfig, products, setProducts }}>
+    <Context.Provider
+      value={{
+        adminUserInfo,
+        setAdminUserInfo,
+        adminConfig,
+        setAdminConfig,
+        products,
+        setProducts,
+      }}
+    >
       <BrowserRouter>
         <ResetStyle />
         <Routes>
           <Route path="/" element={<MainPage />} />
+          
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Registration />} />
           <Route path="/admin" element={<Admin />} />
