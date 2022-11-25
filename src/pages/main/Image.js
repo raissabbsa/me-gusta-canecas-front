@@ -10,10 +10,8 @@ export default function Image({p}){
             
             <p>{p.name}</p>
             <h1>R$ {p.price}</h1>
-        </Block>
-        
+        </Block>    
     )
-
 }
 const Block = styled.div`
     display: flex;
@@ -50,4 +48,4 @@ const Block = styled.div`
         color: ${props => props.stock ? "#2D799E" : "#EB453D"};
         font-size: 15px;
     }
-`
+`;

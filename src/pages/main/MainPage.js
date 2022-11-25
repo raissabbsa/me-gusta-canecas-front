@@ -24,6 +24,7 @@ export default function MainPage() {
       <Header />
       <Container>
         {products.map((p) => (<Image key={p._id} p={p} />))}
+
       </Container>
     </>
   );
