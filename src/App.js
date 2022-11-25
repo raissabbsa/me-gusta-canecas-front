@@ -31,6 +31,5 @@ export default function App() {
           </Routes>
         </BrowserRouter>
       </Context.Provider>
-    </UserProvider>
-  );
+    </UserProvider>)
 }
