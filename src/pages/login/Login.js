@@ -1,10 +1,16 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { useContext } from "react"
+import { TokenContext } from "../../contexts/Token"
+import axios from "axios"
+import { URL } from "../../constants/urls";
+
 
 export default function Login() {
     const [form,setForm] = useState({email:"", password:""})
     const [loading, setLoading] = useState(false)
+    const {setToken} = useContext(TokenContext)
     const navigate = useNavigate()
 
     function fillForm(e){
@@ -15,6 +21,14 @@ export default function Login() {
         e.preventDefault()
         setLoading(true)
         console.log(form)
+        const promise = axios.post(`${URL}/sign-in`, form)
+        promise.then(res => {
+            setToken(res.data.token)
+            navigate("/")
+        })
+        promise.catch(err => {
+            console.log(err)
+        })
     }
     return (
         <ContainerLogin>

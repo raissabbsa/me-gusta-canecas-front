@@ -12,16 +12,14 @@ export default function Registration() {
     function fillForm(e) {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
-
     function register(e) {
         e.preventDefault()
         setLoading(true)
-        console.log(form)
         const URL = "https://projeto15-megusta-api.onrender.com/sign-up"
         if (form.password === form.confirmPassword) {
             const promise = axios.post(URL, form)
             promise.then(res => {
-                navigate("/")
+                navigate("/login")
             })
             promise.catch(err => {
                 alert(err.response.data.message)
