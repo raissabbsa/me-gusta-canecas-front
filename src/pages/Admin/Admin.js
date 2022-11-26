@@ -32,14 +32,12 @@ export default function AdminSignIn() {
           },
         });
 
-        const localInfo = JSON.stringify(res.data);
-      sessionStorage.setItem("adminUserInfo", localInfo);
+        const rootLocalInfo = JSON.stringify(res.data);
+      sessionStorage.setItem("adminUserInfo", rootLocalInfo);
 
       setLoading(false);
       navigate("/admin/produtos");
     });
-
-    console.log(adminUserInfo);
 
     promise.catch((err) => {
       setLoading(false);

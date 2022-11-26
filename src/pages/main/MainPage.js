@@ -17,7 +17,7 @@ export default function MainPage() {
     promise.catch((err) => {
       console.log(err);
     });
-  },[]);
+  },[setProducts]);
 
   return (
     <>
