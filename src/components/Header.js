@@ -16,7 +16,10 @@ export default function Header() {
           <p>Me Gusta Canecas</p>
         </div>
         <Right>
-          Olá, {userInfo.name === undefined ? "Visitante!" : `${userInfo.name.toUpperCase()}!`}
+          Olá,{" "}
+          {userInfo.name === undefined
+            ? "Visitante!"
+            : `${userInfo.name.toUpperCase()}!`}
           <ion-icon
             onClick={() => navigate("/login")}
             name="person-circle-outline"
