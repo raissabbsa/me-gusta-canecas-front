@@ -2,7 +2,7 @@ import { useState, createContext } from "react";
 
 export const Context = createContext();
 
-export default function UserProvider({ children }) {
+export function UserProvider({ children }) {
   const [token, setToken] = useState();
   const [adminUserInfo, setAdminUserInfo] = useState({});
   const [adminConfig, setAdminConfig] = useState({});
@@ -24,10 +24,12 @@ export default function UserProvider({ children }) {
         config,
         setConfig,
         products,
-        setProducts,
+        setProducts
       }}
     >
       {children}
     </Context.Provider>
   );
 }
+
+export default Context;

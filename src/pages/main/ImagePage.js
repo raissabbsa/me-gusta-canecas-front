@@ -1,128 +1,165 @@
-import { useParams } from "react-router-dom"
-import axios from "axios"
-import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { URL } from "../../constants/urls";
 import Header from "../../components/Header";
 import styled from "styled-components";
 
-export default function ImagePage(){
-    const [image, setImage] = useState({})
-    const [quant, setQuant] = useState(1)
-    const { imageId } = useParams()
+export default function ImagePage() {
+  const [image, setImage] = useState({});
+  const [quant, setQuant] = useState(1);
+  const { imageId } = useParams();
 
-    useEffect(() => {
-        const promise = axios.get(`${URL}/products/${imageId}`)
-    
-        promise.then((res) => {
-          setImage(res.data)
-        })
-    
-        promise.catch((err) => {
-          console.log(err.response.data)
-        })
-      },[])
+  useEffect(() => {
+    const promise = axios.get(`${URL}/products/${imageId}`);
 
+    promise.then((res) => {
+      setImage(res.data);
+    });
 
-      function changeQuant(operator){
-        if(operator === "+"){
-            if(quant < Number(image.quantity)){
-                setQuant(quant+1)
-            }
-        }
-        else{
-            if(quant>1){
-                setQuant(quant-1)
-            }
-        }
+    promise.catch((err) => {
+      console.log(err.response.data);
+    });
+  });
+
+  function changeQuant(operator) {
+    if (operator === "+") {
+      if (quant < Number(image.quantity)) {
+        setQuant(quant + 1);
       }
+    } else {
+      if (quant > 1) {
+        setQuant(quant - 1);
+      }
+    }
+  }
 
-    return(
-        <>
-            <Header />            
-            <ImageBox>
-                <div>
-                    <h1>Categoria: {image.category}</h1>
-                    <h1>{image.name}</h1>
-                    <img src={image.imageLink} />
-                </div>
-                
-                <Infos stock={image.stock}>
-                    <h2>R$ {image.price}</h2>
-                    <p>{image.description}</p>
-                    <p>Quantidade em estoque: {image.stock? image.quantity : "0"}</p>
-                    <Amount>
-                        <button>{quant}</button>
-                        <div>
-                            <button 
-                                onClick={() => changeQuant("+")}
-                                disabled={image.stock ? "" : "disabled"}>
-                                    +
-                            </button>
-                            <button 
-                            onClick={() => changeQuant("-")}
-                            disabled={image.stock ? "" : "disabled"}>
-                                -
-                            </button>
-                        </div>
-
-                    </Amount>
-                    <button disabled={image.stock ? "" : "disabled"}>Comprar agora</button>
-                </Infos>
-            </ImageBox>
-        </>)
+  return (
+    <>
+      <Header />
+      <Main>
+        <TitleContainer>
+          <h1>{image.name}</h1>
+          <h2>Categoria: {image.category}</h2>
+        </TitleContainer>
+        <ProductContainer>
+          <ImageContainer src={image.imageLink} alt={image.name} />
+          <InfoContainer>
+            <h3>R$ {image.price}</h3>
+            <h4>Quantidade em estoque: {image.stock ? image.quantity : "0"}</h4>
+            <Amount>
+              <button>{quant}</button>
+              <div>
+                <button
+                  onClick={() => changeQuant("+")}
+                  disabled={image.stock ? "" : "disabled"}
+                >
+                  +
+                </button>
+                <button
+                  onClick={() => changeQuant("-")}
+                  disabled={image.stock ? "" : "disabled"}
+                >
+                  -
+                </button>
+              </div>
+            </Amount>
+            <button disabled={image.stock ? "" : "disabled"}>
+              Comprar agora
+            </button>
+          </InfoContainer>
+        </ProductContainer>
+        <DescriptionContainer>
+          <p>Descrição:</p> {image.description}
+        </DescriptionContainer>
+      </Main>
+    </>
+  );
 }
+
+const Main = styled.div`
+  padding: 150px ;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  @media (max-width: 800px) {
+    padding: 100px;
+  }
+  @media (max-width: 650px) {
+    padding: 100px 30px;
+  }
+`;
+const TitleContainer = styled.div`
+  justify-content: center;
+  align-items: center;
+  color: #404040;
+  padding: 15px;
+  width: 100%;
+  h1 {
+    margin: 10px 0;
+    font-size: 25px;
+    font-weight: 700;
+  }
+  h2 {
+    margin: 10px 0;
+    font-size: 15px;
+  }
+`;
+const ProductContainer = styled.div`
+  display: flex;
+  align-items: center;
+  @media (max-width: 650px) {
+    flex-direction: column;
+  }
+`;
+const ImageContainer = styled.img`
+  border-radius: 5px;
+  width: 70%;
+`;
+const InfoContainer = styled.div`
+  justify-content: center;
+  color: #404040;
+  padding: 20px;
+  width: 100%;
+  h3 {
+    margin: 15px 0;
+    font-size: 23px;
+    font-weight: 700;
+  }
+  h4 {
+    margin: 15px 0;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  & > button {
+    width: 100%;
+    height: 40px;
+    background-color: #2d799e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+  }
+`;
+const DescriptionContainer = styled.div`
+p{
+    font-weight: 700;
+    margin: 10px 0;
+}`;
 const Amount = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+  & > div {
     display: flex;
-    margin-bottom: 20px;
-    &>div{
-        display: flex;
-        flex-direction: column;
-    }
-    button{
-        background-color: ${props => props.stock? "#E0E0E0": "#E0E0E0"};
-        border-radius: 2px;
+    flex-direction: column;
+  }
+  button {
+    background-color: ${(props) => (props.stock ? "#E0E0E0" : "#E0E0E0")};
+    border-radius: 2px;
+    border: none;
 
-        margin-right: 2px;
-        cursor: pointer;
-    }
-`
-
-const Infos = styled.div`
-    &>button{
-        height: 40px;
-        background-color: #2D799E;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-`
-
-const ImageBox = styled.div`
-    padding-top: 200px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    color: #404040;
-    &>div{
-        display: flex;
-        flex-direction: column;
-        margin-right: 50px;
-    }
-    &>img{
-        width: 300px;
-    }
-    h1{
-        margin-bottom: 20px;
-    }
-    p{
-       margin-bottom: 10px;
-    }
-    
-    h2{
-        font-size: 25px;
-        margin-bottom: 20px;
-    }
-`
+    margin: 2px 3px;
+    cursor: pointer;
+  }
+`;

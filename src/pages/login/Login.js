@@ -1,14 +1,13 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Context } from "../../contexts/Context";
+import Context from "../../contexts/Context";
 import axios from "axios";
 import { URL } from "../../constants/urls";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const { setToken } = useContext(Context);
   const { setUserInfo } = useContext(Context);
   const { setConfig } = useContext(Context);
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ export default function Login() {
   function login(e) {
     e.preventDefault();
     setLoading(true);
-    console.log(form);
+
     const promise = axios.post(`${URL}/sign-in`, form);
     promise.then((res) => {
       setUserInfo(res.data);
