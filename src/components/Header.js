@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../contexts/Context";
 import styled from "styled-components";
@@ -8,11 +8,13 @@ export default function Header() {
   const { userInfo } = useContext(Context);
   
   function acessCart() {
+    
     if (userInfo.token !== undefined) {
       navigate("/carrinho");
     } else {
       navigate("/login");
     }
+  
   }
     return (
     <Container>
@@ -22,10 +24,9 @@ export default function Header() {
           <p>Me Gusta Canecas</p>
         </div>
         <Right>
-          Olá,{" "}
           {userInfo.name === undefined
-            ? "Visitante!"
-            : `${userInfo.name.toUpperCase()}!`}
+            ? ""
+            : `Olá, ${userInfo.name.toUpperCase()}!`}
           <ion-icon
             onClick={() => navigate("/login")}
             name="person-circle-outline"

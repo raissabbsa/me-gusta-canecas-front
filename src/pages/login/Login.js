@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Context from "../../contexts/Context";
@@ -28,12 +28,29 @@ export default function Login() {
           Authorization: `Bearer ${res.data.token}`,
         },
       });
+      const localInfo = JSON.stringify(res.data);
+      sessionStorage.setItem("userInfo", localInfo);
       navigate("/");
     });
     promise.catch((err) => {
       console.log(err);
     });
   }
+
+  useEffect(() => {
+    const savedInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+
+    if (savedInfo !== null) {
+      setUserInfo(savedInfo);
+      setConfig({
+        headers: {
+          Authorization: `Bearer ${savedInfo.token}`,
+        },
+      });
+      navigate("/");
+    }
+    }, []);
+
   return (
     <ContainerLogin>
       <Top>
