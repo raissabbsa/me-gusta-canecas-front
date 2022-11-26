@@ -1,7 +1,31 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useContext } from "react";
+import { URL } from "../../constants/urls";
+import Context from "../../contexts/Context";
 
 export default function Image({ p }) {
+  const navigate = useNavigate();
+  const { config, userInfo } = useContext(Context);
+  const cartForm = { productId: p._id, quantity: 1 };
+
+  function addToCart() {
+    if (!userInfo.token) {
+      navigate("/login");
+      return;
+    } else {
+      const promise = axios.post(`${URL}/cart`, cartForm, config);
+      promise.then((res) => {
+        alert(res.data);
+      });
+      promise.catch((err) => {
+        console.log(err);
+      });
+    }
+  }
+
   return (
     <Block stock={p.stock}>
       <Link to={`/produto/${p._id}`}>
@@ -10,7 +34,7 @@ export default function Image({ p }) {
 
       <p>{p.name}</p>
       <h1>R$ {p.price}</h1>
-      <Button disabled={p.stock ? "" : "disabled"}>Comprar</Button>
+      <Button onClick={addToCart} disabled={p.stock ? "" : "disabled"}>Comprar</Button>
     </Block>
   );
 }

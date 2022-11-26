@@ -1,14 +1,20 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../contexts/Context";
-
 import styled from "styled-components";
 
 export default function Header() {
   const navigate = useNavigate();
   const { userInfo } = useContext(Context);
-
-  return (
+  
+  function acessCart() {
+    if (userInfo.token !== undefined) {
+      navigate("/carrinho");
+    } else {
+      navigate("/login");
+    }
+  }
+    return (
     <Container>
       <Top>
         <div onClick={() => navigate("/")}>
@@ -24,7 +30,7 @@ export default function Header() {
             onClick={() => navigate("/login")}
             name="person-circle-outline"
           ></ion-icon>
-          <ion-icon name="cart-outline"></ion-icon>
+          <ion-icon onClick={()=> acessCart()} name="cart-outline"></ion-icon>
           <ion-icon name="log-out-outline"></ion-icon>
         </Right>
       </Top>
@@ -37,6 +43,7 @@ export default function Header() {
     </Container>
   );
 }
+
 const Container = styled.div`
   position: fixed;
   top: 0;

@@ -9,6 +9,7 @@ export function UserProvider({ children }) {
   const [userInfo, setUserInfo] = useState({});
   const [config, setConfig] = useState({});
   const [products, setProducts] = useState([]);
+  const [image, setImage] = useState({});
 
   return (
     <Context.Provider
@@ -24,7 +25,9 @@ export function UserProvider({ children }) {
         config,
         setConfig,
         products,
-        setProducts
+        setProducts,
+        image,
+        setImage,
       }}
     >
       {children}

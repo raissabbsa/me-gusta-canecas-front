@@ -1,14 +1,18 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { URL } from "../../constants/urls";
+import Context from "../../contexts/Context";
 import Header from "../../components/Header";
 import styled from "styled-components";
 
 export default function ImagePage() {
+  const navigate = useNavigate();
   const [image, setImage] = useState({});
   const [quant, setQuant] = useState(1);
   const { imageId } = useParams();
+  const { config, userInfo } = useContext(Context);
+  const cartForm = { productId: image._id, quantity: quant };
 
   useEffect(() => {
     const promise = axios.get(`${URL}/products/${imageId}`);
@@ -31,6 +35,21 @@ export default function ImagePage() {
       if (quant > 1) {
         setQuant(quant - 1);
       }
+    }
+  }
+
+  function addToCart() {
+    if (!userInfo.token) {
+      navigate("/login");
+      return;
+    } else {
+      const promise = axios.post(`${URL}/cart`, cartForm, config);
+      promise.then((res) => {
+        alert(res.data);
+      });
+      promise.catch((err) => {
+        console.log(err);
+      });
     }
   }
 
@@ -64,7 +83,10 @@ export default function ImagePage() {
                 </button>
               </div>
             </Amount>
-            <button disabled={image.stock ? "" : "disabled"}>
+            <button
+              onClick={addToCart}
+              disabled={image.stock ? "" : "disabled"}
+            >
               Comprar agora
             </button>
           </InfoContainer>
@@ -78,7 +100,7 @@ export default function ImagePage() {
 }
 
 const Main = styled.div`
-  padding: 150px ;
+  padding: 150px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -143,10 +165,11 @@ const InfoContainer = styled.div`
   }
 `;
 const DescriptionContainer = styled.div`
-p{
+  p {
     font-weight: 700;
     margin: 10px 0;
-}`;
+  }
+`;
 const Amount = styled.div`
   display: flex;
   margin-bottom: 20px;
