@@ -10,6 +10,14 @@ export default function Image({ p }) {
   const navigate = useNavigate();
   const { config, userInfo } = useContext(Context);
   const cartForm = { productId: p._id, quantity: 1 };
+  console.log("p._id");
+  console.log(p._id)
+  console.log("p")
+  console.log(p)
+  console.log("cartForm")
+  console.log(cartForm)
+  console.log("config")
+  console.log(config)
 
   function addToCart() {
     if (!userInfo.token) {
