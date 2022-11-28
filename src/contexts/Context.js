@@ -3,19 +3,17 @@ import { useState, createContext } from "react";
 export const Context = createContext();
 
 export function UserProvider({ children }) {
-  const [token, setToken] = useState();
   const [adminUserInfo, setAdminUserInfo] = useState({});
   const [adminConfig, setAdminConfig] = useState({});
   const [userInfo, setUserInfo] = useState({});
   const [config, setConfig] = useState({});
   const [products, setProducts] = useState([]);
   const [image, setImage] = useState({});
+  const [changeSection, setSection] = useState("");
 
   return (
     <Context.Provider
       value={{
-        token,
-        setToken,
         adminUserInfo,
         setAdminUserInfo,
         adminConfig,
@@ -28,6 +26,8 @@ export function UserProvider({ children }) {
         setProducts,
         image,
         setImage,
+        changeSection, 
+        setSection
       }}
     >
       {children}

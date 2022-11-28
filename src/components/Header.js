@@ -1,20 +1,36 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../contexts/Context";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import {URL} from "../constants/urls"
+import axios from "axios";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { userInfo } = useContext(Context);
+  const { userInfo, config, setConfig, setSection, setUserInfo} = useContext(Context);
   
   function acessCart() {
     
     if (userInfo.token !== undefined) {
+
       navigate("/carrinho");
     } else {
       navigate("/login");
     }
   
+  }
+
+  function exit(){
+    const promise = axios.delete(`${URL}/exit`, config);
+    promise.then(res => {
+      setConfig({})
+      setUserInfo({})
+    })
+    promise.catch(err => {
+      console.log(err)
+    })
+
   }
     return (
     <Container>
@@ -32,14 +48,14 @@ export default function Header() {
             name="person-circle-outline"
           ></ion-icon>
           <ion-icon onClick={()=> acessCart()} name="cart-outline"></ion-icon>
-          <ion-icon name="log-out-outline"></ion-icon>
+          <ion-icon onClick={() => exit()} name="log-out-outline"></ion-icon>
         </Right>
       </Top>
       <Sections>
-        <p>Geek</p>
-        <p>Profissão</p>
-        <p>Animais</p>
-        <p>Namorados</p>
+        <Link onClick={() => setSection("geek")} to={"/Geek"}><p>Geek</p></Link>
+        <Link onClick={() => setSection("profissao")} to={"/Profissão"}><p>Profissão</p></Link>
+        <Link onClick={() => setSection("animais")} to={"/Animais"}><p>Animais</p></Link>
+        <Link onClick={() => setSection("namorados")} to={"/Namorados"}><p>Namorados</p></Link>
       </Sections>
     </Container>
   );
