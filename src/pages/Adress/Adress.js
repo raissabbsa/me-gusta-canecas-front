@@ -7,7 +7,16 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Adress() {
   const { config } = useContext(Context);
-  const [adress, setAdress] = useState({street:"", number:"", complement:"", postalCode:"", district:"", city:"", state:"", type:""});
+  const [adress, setAdress] = useState({
+    street: "",
+    number: "",
+    complement: "",
+    postalCode: "",
+    district: "",
+    city: "",
+    state: "",
+    type: "",
+  });
   const [loading, setLoading] = useState(false);
   const [savedAdress, setSavedAdress] = useState({});
   const navigate = useNavigate();
@@ -15,16 +24,14 @@ export default function Adress() {
   useEffect(() => {
     const promise = axios.get(`${process.env.REACT_APP_HOST}/adress`, config);
     promise.then((res) => {
-      if(res.data.length>0){
-        setSavedAdress(res.data);
+      console.log(res.data);
 
-      }
+      setSavedAdress(res.data);
     });
     promise.catch((err) => {
       console.log(err.response.data);
     });
   }, [config]);
- 
 
   function fillForm(e) {
     setAdress({ ...adress, [e.target.name]: e.target.value });
@@ -33,7 +40,7 @@ export default function Adress() {
   function registerAdress(e) {
     e.preventDefault();
     setLoading(true);
-    console.log(adress)
+    console.log(adress);
     const promise = axios.post(
       `${process.env.REACT_APP_HOST}/adress`,
       adress,
@@ -53,102 +60,106 @@ export default function Adress() {
   if (savedAdress) {
     return (
       <>
-      <Header />
-      <Container>
-        <h1>Endereço de entrega</h1>
-        <div>
-          <Line>Rua: {savedAdress.street}</Line>
-          <Line>Número: {savedAdress.number}</Line>
-          <Line>Complemento: {savedAdress.complement}</Line>
-          <Line>Bairro: {savedAdress.district}</Line>
-          <Line>Cidade: {savedAdress.city}</Line>
-          <Line>Estado: {savedAdress.state}</Line>
-          <Line>CEP: {savedAdress.postalCode}</Line>
-          <Line>Tipo: {savedAdress.type}</Line>
-        </div>
-        <Button to="/checkout">{loading ? "Carregando..." : "Checkout"}</Button>
-      </Container>
-    </>
-  )}
-  
+        <Header />
+        <Container>
+          <h1>Endereço de entrega</h1>
+          <div>
+            <Line>Rua: {savedAdress.street}</Line>
+            <Line>Número: {savedAdress.number}</Line>
+            <Line>Complemento: {savedAdress.complement}</Line>
+            <Line>Bairro: {savedAdress.district}</Line>
+            <Line>Cidade: {savedAdress.city}</Line>
+            <Line>Estado: {savedAdress.state}</Line>
+            <Line>CEP: {savedAdress.postalCode}</Line>
+            <Line>Tipo: {savedAdress.type}</Line>
+          </div>
+          <Button to="/checkout">
+            {loading ? "Carregando..." : "Checkout"}
+          </Button>
+        </Container>
+      </>
+    );
+  }
+
   if (!savedAdress) {
     return (
-    <>
-      <Header />
-      <Container>
-        <h1>Cadastre um endereço para envio dos produtos</h1>
-        <form onSubmit={registerAdress}>
-          <input
-            placeholder="Rua"
-            type="text"
-            name="street"
-            value={adress.street}
-            onChange={fillForm}
-            disabled={loading ? "disabled" : ""}
-          />
-          <input
-            placeholder="Numero"
-            type="number"
-            name="number"
-            value={adress.number}
-            onChange={fillForm}
-            disabled={loading ? "disabled" : ""}
-          />
-          <input
-            placeholder="Complemento"
-            type="text"
-            name="complement"
-            value={adress.complement}
-            onChange={fillForm}
-            disabled={loading ? "disabled" : ""}
-          />
-          <input
-            placeholder="CEP"
-            type="number"
-            name="postalCode"
-            value={adress.postalCode}
-            onChange={fillForm}
-            disabled={loading ? "disabled" : ""}
-          />
-          <input
-            placeholder="Bairro"
-            type="text"
-            name="district"
-            value={adress.district}
-            onChange={fillForm}
-            disabled={loading ? "disabled" : ""}
-          />
-          <input
-            placeholder="Cidade"
-            type="text"
-            name="city"
-            value={adress.city}
-            onChange={fillForm}
-            disabled={loading ? "disabled" : ""}
-          />
-          <input
-            placeholder="Estado"
-            type="text"
-            name="state"
-            value={adress.state}
-            onChange={fillForm}
-            disabled={loading ? "disabled" : ""}
-          />
-          <input
-            placeholder="Tipo de endereço (residencial, comercial, etc)"
-            type="text"
-            name="type"
-            value={adress.type}
-            onChange={fillForm}
-            disabled={loading ? "disabled" : ""}
-          />
-          <Button type="submit" disabled={loading ? "disabled" : ""}>
-            {loading ? "Carregando..." : "Cadastrar endereço"}
-          </Button>
-        </form>
-      </Container>
-    </>
-  )};
+      <>
+        <Header />
+        <Container>
+          <h1>Cadastre um endereço para envio dos produtos</h1>
+          <form onSubmit={registerAdress}>
+            <input
+              placeholder="Rua"
+              type="text"
+              name="street"
+              value={adress.street}
+              onChange={fillForm}
+              disabled={loading ? "disabled" : ""}
+            />
+            <input
+              placeholder="Numero"
+              type="number"
+              name="number"
+              value={adress.number}
+              onChange={fillForm}
+              disabled={loading ? "disabled" : ""}
+            />
+            <input
+              placeholder="Complemento"
+              type="text"
+              name="complement"
+              value={adress.complement}
+              onChange={fillForm}
+              disabled={loading ? "disabled" : ""}
+            />
+            <input
+              placeholder="CEP"
+              type="number"
+              name="postalCode"
+              value={adress.postalCode}
+              onChange={fillForm}
+              disabled={loading ? "disabled" : ""}
+            />
+            <input
+              placeholder="Bairro"
+              type="text"
+              name="district"
+              value={adress.district}
+              onChange={fillForm}
+              disabled={loading ? "disabled" : ""}
+            />
+            <input
+              placeholder="Cidade"
+              type="text"
+              name="city"
+              value={adress.city}
+              onChange={fillForm}
+              disabled={loading ? "disabled" : ""}
+            />
+            <input
+              placeholder="Estado"
+              type="text"
+              name="state"
+              value={adress.state}
+              onChange={fillForm}
+              disabled={loading ? "disabled" : ""}
+            />
+            <input
+              placeholder="Tipo de endereço (residencial, comercial, etc)"
+              type="text"
+              name="type"
+              value={adress.type}
+              onChange={fillForm}
+              disabled={loading ? "disabled" : ""}
+            />
+            <Button type="submit" disabled={loading ? "disabled" : ""}>
+              {loading ? "Carregando..." : "Cadastrar endereço"}
+            </Button>
+          </form>
+        </Container>
+      </>
+    );
+  }
 }
 
 const Container = styled.div`

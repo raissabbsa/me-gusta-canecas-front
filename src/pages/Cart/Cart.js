@@ -16,8 +16,6 @@ export default function Cart() {
     promise.then((res) => {
       setCart(res.data);
       setLoading(true);
-      console.log("res.data");
-      console.log(res.data);
     });
     promise.catch((err) => {
       console.log(err);

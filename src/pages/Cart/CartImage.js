@@ -3,7 +3,14 @@ import axios from "axios";
 import { useContext } from "react";
 import Context from "../../contexts/Context";
 
-export default function CartImage({ _id, productId, name, price, imageLink, quantity }) {
+export default function CartImage({
+  _id,
+  productId,
+  name,
+  price,
+  imageLink,
+  quantity,
+}) {
   const { config } = useContext(Context);
   const { cart, setCart } = useContext(Context);
 
@@ -13,7 +20,7 @@ export default function CartImage({ _id, productId, name, price, imageLink, quan
       config
     );
     promise.then((res) => {
-      console.log(res);
+      alert(res.data);
     });
     promise.catch((err) => {
       console.log(err);
