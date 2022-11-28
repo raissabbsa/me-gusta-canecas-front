@@ -20,22 +20,21 @@ export default function Cart() {
     promise.catch((err) => {
       console.log(err);
     });
-  }, [config]);
+  }, [config ]);
 
   return (
     <>
       <Header />
-       
-      {/*    {cart.map((p) => (
-          <CartImage
-            key={p._id}
-            name={p.name}
-            price={p.price}
-            imageLink={p.imageLink}
-            quantity={p.quantity}
-          />
-        ))}  */}
-      
+
+      {cart?.map((p) => (
+        <CartImage
+          key={p._id}
+          name={p.name}
+          price={p.price}
+          imageLink={p.imageLink}
+          quantity={p.quantity}
+        />
+      ))}
     </>
   );
 }

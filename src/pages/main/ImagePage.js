@@ -13,16 +13,6 @@ export default function ImagePage() {
   const { imageId } = useParams();
   const { config, userInfo } = useContext(Context);
   const cartForm = { productId: image._id, quantity: quant.toString() };
-  console.log("image._id")
-  console.log(image._id)
-  console.log("image")
-  console.log(image)
-  console.log("cartForm")
-  console.log(cartForm)
-  console.log("quant")
-  console.log(quant.toString())
-  console.log("config")
-  console.log(config)
 
   useEffect(() => {
     const promise = axios.get(`${URL}/products/${imageId}`);

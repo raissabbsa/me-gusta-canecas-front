@@ -17,8 +17,8 @@ export default function Registration() {
         e.preventDefault()
         setLoading(true)
         
-        if (form.password === form.confirmPassword) {
-            const promise = axios.post(`${URL}/sign-in`, form)
+        //if (form.password === form.confirmPassword) {
+            const promise = axios.post(`${URL}/sign-up`, form)
             promise.then(res => {
                 navigate("/login")
             })
@@ -26,10 +26,10 @@ export default function Registration() {
                 alert(err.response.data.message)
                 setLoading(false)
             })
-        } else {
+       /*  } else {
             setLoading(false)
             alert("As senhas precisam ser iguais")
-        }
+        } */
 
     }
     return (
