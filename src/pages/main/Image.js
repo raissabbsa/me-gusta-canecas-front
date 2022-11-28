@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
-import { URL } from "../../constants/urls";
+//import { URL } from "../../constants/urls";
 import Context from "../../contexts/Context";
 
 export default function Image({ p }) {
@@ -16,7 +16,7 @@ export default function Image({ p }) {
       navigate("/login");
       return;
     } else {
-      const promise = axios.post(`${URL}/cart`, cartForm, config);
+      const promise = axios.post(`${process.env.REACT_APP_HOST}/cart`, cartForm, config);
       promise.then((res) => {
         alert(res.data);
       });

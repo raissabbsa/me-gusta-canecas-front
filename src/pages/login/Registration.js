@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { IMaskInput } from "react-imask"
-import { URL } from "../../constants/urls";
+//import { URL } from "../../constants/urls";
 
 export default function Registration() {
     const [form, setForm] = useState({ name: "", email: "", document: "", password: "", confirmPassword: "" })
@@ -17,7 +17,7 @@ export default function Registration() {
         e.preventDefault()
         setLoading(true)
 
-        const promise = axios.post(`${URL}/sign-up`, form)
+        const promise = axios.post(`${process.env.REACT_APP_HOST}/sign-up`, form)
         promise.then(res => {
             navigate("/login")
         })

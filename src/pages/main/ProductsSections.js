@@ -5,7 +5,7 @@ import Context from "../../contexts/Context";
 import { useParams } from "react-router-dom";
 import Image from "./Image";
 import styled from "styled-components";
-import { URL } from "../../constants/urls";
+//import { URL } from "../../constants/urls";
 
 export default function ProductsSections(){
     const { sections } = useParams();
@@ -13,7 +13,7 @@ export default function ProductsSections(){
     const { changeSection } = useContext(Context);
   
     useEffect(() => {
-        const promise = axios.get(`${URL}/${sections}`);
+        const promise = axios.get(`${process.env.REACT_APP_HOST}/${sections}`);
     
         promise.then((res) => {
           setProducts(res.data);

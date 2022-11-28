@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { URL } from "../../constants/urls";
+//import { URL } from "../../constants/urls";
 import Context from "../../contexts/Context";
 import Header from "../../components/Header";
 import styled from "styled-components";
@@ -15,7 +15,7 @@ export default function ImagePage() {
   const cartForm = { productId: image._id, quantity: quant.toString() };
 
   useEffect(() => {
-    const promise = axios.get(`${URL}/products/${imageId}`);
+    const promise = axios.get(`${process.env.REACT_APP_HOST}/products/${imageId}`);
 
     promise.then((res) => {
       setImage(res.data);
@@ -43,7 +43,7 @@ export default function ImagePage() {
       navigate("/login");
       return;
     } else {
-      const promise = axios.post(`${URL}/cart`, cartForm, config);
+      const promise = axios.post(`${process.env.REACT_APP_HOST}/cart`, cartForm, config);
       promise.then((res) => {
         alert(res.data);
         console.log("cartForm in addToCart");

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Context from "../../contexts/Context";
 import axios from "axios";
-import { URL } from "../../constants/urls";
+//import { URL } from "../../constants/urls";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -20,7 +20,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
 
-    const promise = axios.post(`${URL}/sign-in`, form);
+    const promise = axios.post(`${process.env.REACT_APP_HOST}/sign-in`, form);
     promise.then((res) => {
       setUserInfo(res.data);
       setConfig({

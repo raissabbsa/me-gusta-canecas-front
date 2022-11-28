@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Context from "../contexts/Context";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import {URL} from "../constants/urls"
+//import {URL} from "../constants/urls"
 import axios from "axios";
 
 export default function Header() {
@@ -22,7 +22,7 @@ export default function Header() {
   }
 
   function exit(){
-    const promise = axios.delete(`${URL}/exit`, config);
+    const promise = axios.delete(`${process.env.REACT_APP_HOST}/exit`, config);
     promise.then(res => {
       setConfig({})
       setUserInfo({})

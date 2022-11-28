@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../../contexts/Context";
-import { URL } from "../../constants/urls";
+//import { URL } from "../../constants/urls";
 import styled from "styled-components";
 import axios from "axios";
 import AdminHeader from "../../components/AdminHeader";
@@ -26,7 +26,7 @@ export default function AddAdminUser() {
     setLoading(true);
 
     const promise = axios.post(
-      `${URL}/root-sign-up`,
+      `${process.env.REACT_APP_HOST}/root-sign-up`,
       addAdminForm,
       adminConfig
     );

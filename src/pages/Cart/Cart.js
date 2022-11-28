@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Context from "../../contexts/Context";
 import CartImage from "./CartImage";
-import { URL } from "../../constants/urls";
+//import { URL } from "../../constants/urls";
 import styled from "styled-components";
 
 export default function Cart() {
@@ -12,7 +12,7 @@ export default function Cart() {
   console.log(config);
 
   useEffect(() => {
-    const promise = axios.get(`${URL}/cart`, config);
+    const promise = axios.get(`${process.env.REACT_APP_HOST}/cart`, config);
     promise.then((res) => {
       setCart(res.data);
       console.log(res.data);
