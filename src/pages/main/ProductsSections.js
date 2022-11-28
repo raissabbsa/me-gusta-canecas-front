@@ -13,8 +13,7 @@ export default function ProductsSections(){
     const { changeSection } = useContext(Context);
   
     useEffect(() => {
-        const promise = axios.get(`${process.env.REACT_APP_HOST}/${sections}`);
-    
+        const promise = axios.get(`${process.env.REACT_APP_HOST}/product/${sections}`);
         promise.then((res) => {
           setProducts(res.data);
         });

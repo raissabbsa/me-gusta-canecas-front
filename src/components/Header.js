@@ -49,16 +49,16 @@ export default function Header() {
         </Right>
       </Top>
       <Sections>
-        <Links onClick={() => setSection("geek")} to={"/Geek"}>
+        <Links onClick={() => setSection("geek")} to={"/produtos/Geek"}>
           <p>Geek</p>
         </Links>
-        <Links onClick={() => setSection("profissao")} to={"/Profissão"}>
+        <Links onClick={() => setSection("profissao")} to={"/produtos/Profissão"}>
           <p>Profissão</p>
         </Links>
-        <Links onClick={() => setSection("animais")} to={"/Animais"}>
+        <Links onClick={() => setSection("animais")} to={"/produtos/Animais"}>
           <p>Animais</p>
         </Links>
-        <Links onClick={() => setSection("namorados")} to={"/Namorados"}>
+        <Links onClick={() => setSection("namorados")} to={"/produtos/Namorados"}>
           <p>Namorados</p>
         </Links>
       </Sections>

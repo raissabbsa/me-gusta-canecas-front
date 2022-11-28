@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Context from "../../contexts/Context";
 import CartImage from "./CartImage";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const [cart, setCart] = useState();
@@ -26,13 +27,14 @@ export default function Cart() {
         {cart?.map((p) => (
           <CartImage
             key={p._id}
+            id={p._id}
             name={p.name}
             price={p.price}
             imageLink={p.imageLink}
             quantity={p.quantity}
           />
         ))}
-        <Checkout>Checkout</Checkout>
+        <Button to={"/carrinho/endereco"}>Próximo</Button>
       </Container>
     </>
   );
@@ -46,7 +48,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Checkout = styled.button`
+const Button = styled(Link)`
   width: 150px;
   height: 60px;
   background-color: #2d799e;
@@ -57,4 +59,7 @@ const Checkout = styled.button`
   padding: 15px;
   margin: 10px;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

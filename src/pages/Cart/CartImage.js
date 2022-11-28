@@ -1,6 +1,25 @@
 import styled from "styled-components";
+import axios from "axios";
+import { useContext } from "react";
+import Context from "../../contexts/Context";
 
-export default function CartImage({ name, price, imageLink, quantity }) {
+export default function CartImage({ id, name, price, imageLink, quantity }) {
+  const { config } = useContext(Context);
+
+  function removeProduct() {
+    const promise = axios.delete(
+      `${process.env.REACT_APP_HOST}/cart/`,
+      { productId: id },
+      config
+    );
+    promise.then((res) => {
+      console.log(res);
+    });
+    promise.catch((err) => {
+      console.log(err);
+    });
+  }
+
   return (
     <Conteiner>
       <img src={imageLink} alt={name} />
@@ -10,7 +29,7 @@ export default function CartImage({ name, price, imageLink, quantity }) {
       </div>
       <h2>R$ {price}</h2>
 
-      <Button>
+      <Button onClick={() => removeProduct(id)}>
         Remover
         <br />
         do carrinho
