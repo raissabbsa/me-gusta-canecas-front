@@ -22,6 +22,7 @@ export default function Header() {
   function exit() {
     const promise = axios.delete(`${process.env.REACT_APP_HOST}/exit`, config);
     promise.then((res) => {
+      sessionStorage.clear();
       setConfig({});
       setUserInfo({});
     });
