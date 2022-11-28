@@ -3,7 +3,6 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { IMaskInput } from "react-imask"
-//import { URL } from "../../constants/urls";
 
 export default function Registration() {
     const [form, setForm] = useState({ name: "", email: "", document: "", password: "", confirmPassword: "" })

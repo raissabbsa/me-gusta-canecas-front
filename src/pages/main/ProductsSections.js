@@ -5,7 +5,7 @@ import Context from "../../contexts/Context";
 import { useParams } from "react-router-dom";
 import Image from "./Image";
 import styled from "styled-components";
-//import { URL } from "../../constants/urls";
+
 
 export default function ProductsSections(){
     const { sections } = useParams();

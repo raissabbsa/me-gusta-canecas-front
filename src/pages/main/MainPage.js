@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Header from "../../components/Header";
 import Context from "../../contexts/Context";
 import Image from "./Image";
-//import { URL } from "../../constants/urls";
+
 
 export default function MainPage() {
   const { products, setProducts, config } = useContext(Context);

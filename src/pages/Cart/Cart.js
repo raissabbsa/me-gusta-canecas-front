@@ -3,7 +3,6 @@ import { useContext, useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Context from "../../contexts/Context";
 import CartImage from "./CartImage";
-//import { URL } from "../../constants/urls";
 import styled from "styled-components";
 
 export default function Cart() {

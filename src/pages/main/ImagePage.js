@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-//import { URL } from "../../constants/urls";
 import Context from "../../contexts/Context";
 import Header from "../../components/Header";
 import styled from "styled-components";

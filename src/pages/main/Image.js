@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
-//import { URL } from "../../constants/urls";
 import Context from "../../contexts/Context";
 
 export default function Image({ p }) {
