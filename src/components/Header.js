@@ -3,42 +3,39 @@ import { useNavigate } from "react-router-dom";
 import Context from "../contexts/Context";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-//import {URL} from "../constants/urls"
+
 import axios from "axios";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { userInfo, config, setConfig, setSection, setUserInfo} = useContext(Context);
-  
-  function acessCart() {
-    
-    if (userInfo.token !== undefined) {
+  const { userInfo, config, setConfig, setSection, setUserInfo } =
+    useContext(Context);
 
+  function acessCart() {
+    if (userInfo.token !== undefined) {
       navigate("/carrinho");
     } else {
       navigate("/login");
     }
-  
   }
 
-  function exit(){
+  function exit() {
     const promise = axios.delete(`${process.env.REACT_APP_HOST}/exit`, config);
-    promise.then(res => {
-      setConfig({})
-      setUserInfo({})
-    })
-    promise.catch(err => {
-      console.log(err)
-    })
-
+    promise.then((res) => {
+      setConfig({});
+      setUserInfo({});
+    });
+    promise.catch((err) => {
+      console.log(err);
+    });
   }
-    return (
+  return (
     <Container>
       <Top>
-        <div onClick={() => navigate("/")}>
+        <Div onClick={() => navigate("/")}>
           <ion-icon name="cafe-outline"></ion-icon>
           <p>Me Gusta Canecas</p>
-        </div>
+        </Div>
         <Right>
           {userInfo.name === undefined
             ? ""
@@ -47,15 +44,23 @@ export default function Header() {
             onClick={() => navigate("/login")}
             name="person-circle-outline"
           ></ion-icon>
-          <ion-icon onClick={()=> acessCart()} name="cart-outline"></ion-icon>
+          <ion-icon onClick={() => acessCart()} name="cart-outline"></ion-icon>
           <ion-icon onClick={() => exit()} name="log-out-outline"></ion-icon>
         </Right>
       </Top>
       <Sections>
-        <Link onClick={() => setSection("geek")} to={"/Geek"}><p>Geek</p></Link>
-        <Link onClick={() => setSection("profissao")} to={"/Profissão"}><p>Profissão</p></Link>
-        <Link onClick={() => setSection("animais")} to={"/Animais"}><p>Animais</p></Link>
-        <Link onClick={() => setSection("namorados")} to={"/Namorados"}><p>Namorados</p></Link>
+        <Links onClick={() => setSection("geek")} to={"/Geek"}>
+          <p>Geek</p>
+        </Links>
+        <Links onClick={() => setSection("profissao")} to={"/Profissão"}>
+          <p>Profissão</p>
+        </Links>
+        <Links onClick={() => setSection("animais")} to={"/Animais"}>
+          <p>Animais</p>
+        </Links>
+        <Links onClick={() => setSection("namorados")} to={"/Namorados"}>
+          <p>Namorados</p>
+        </Links>
       </Sections>
     </Container>
   );
@@ -70,6 +75,10 @@ const Container = styled.div`
   background-color: #2d799e;
   width: 100%;
   height: 100px;
+`;
+const Div = styled.div`
+  cursor: pointer;
+  align-items: center;
 `;
 const Top = styled.div`
   box-sizing: border-box;
@@ -109,4 +118,10 @@ const Sections = styled.div`
   & > p {
     cursor: pointer;
   }
+`;
+const Links = styled(Link)`
+p {
+  color: black;
+  font-weight: 500;
+}
 `;

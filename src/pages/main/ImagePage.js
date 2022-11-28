@@ -101,7 +101,7 @@ export default function ImagePage() {
 }
 
 const Main = styled.div`
-  padding: 150px;
+  padding: 130px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -138,6 +138,8 @@ const ProductContainer = styled.div`
 const ImageContainer = styled.img`
   border-radius: 5px;
   width: 70%;
+  object-fit: cover;
+  padding: 10px;
 `;
 const InfoContainer = styled.div`
   justify-content: center;

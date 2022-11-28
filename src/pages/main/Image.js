@@ -42,12 +42,10 @@ const Block = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-right: 20px;
-  margin-left: 20px;
+  margin: 20px;
+  padding: 15px;
   border: 1px solid #2d799e;
   border-radius: 5px;
-  margin-bottom: 20px;
-  margin-top: 40px;
   max-width: 300px;
   min-width: 200px;
   height: 330px;
@@ -58,6 +56,8 @@ const Block = styled.div`
     margin-bottom: 10px;
     border-radius: 5px;
     cursor: pointer;
+    object-fit: cover;
+    padding: 10px;
   }
   & > p {
     text-align: center;
@@ -86,4 +86,7 @@ const Button = styled.div`
   padding: 15px;
   margin: 10px;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

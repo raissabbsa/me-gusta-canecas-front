@@ -34,7 +34,7 @@ const Container = styled.div`
   padding: 100px 30px 0;
   flex-wrap: wrap;
   width: 90%;
-  margin: auto;
+  margin: 5px auto;
   display: flex;
   justify-content: center;
   align-items: center;
