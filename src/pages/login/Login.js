@@ -8,7 +8,8 @@ import { URL } from "../../constants/urls";
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const { setUserInfo, setConfig } = useContext(Context);
+  const { userInfo, setUserInfo } = useContext(Context);
+  const { setConfig } = useContext(Context);
   const navigate = useNavigate();
 
   function fillForm(e) {
@@ -48,7 +49,7 @@ export default function Login() {
       });
       navigate("/");
     }
-    }, []);
+    }, [userInfo]);
 
   return (
     <ContainerLogin>

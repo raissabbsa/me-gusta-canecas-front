@@ -12,7 +12,7 @@ export default function ImagePage() {
   const [quant, setQuant] = useState(1);
   const { imageId } = useParams();
   const { config, userInfo } = useContext(Context);
-  const cartForm = { productId: image._id, quantity: quant };
+  const cartForm = { productId: image._id, quantity: quant.toString() };
 
   useEffect(() => {
     const promise = axios.get(`${URL}/products/${imageId}`);
@@ -24,7 +24,7 @@ export default function ImagePage() {
     promise.catch((err) => {
       console.log(err.response.data);
     });
-  });
+  },[]);
 
   function changeQuant(operator) {
     if (operator === "+") {
@@ -46,6 +46,8 @@ export default function ImagePage() {
       const promise = axios.post(`${URL}/cart`, cartForm, config);
       promise.then((res) => {
         alert(res.data);
+        console.log("cartForm in addToCart");
+        console.log(cartForm);
       });
       promise.catch((err) => {
         console.log(err);

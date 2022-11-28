@@ -9,6 +9,7 @@ import styled from "styled-components";
 export default function Cart() {
   const [cart, setCart] = useState();
   const { config } = useContext(Context);
+  console.log(config);
 
   useEffect(() => {
     const promise = axios.get(`${URL}/cart`, config);
@@ -19,22 +20,21 @@ export default function Cart() {
     promise.catch((err) => {
       console.log(err);
     });
-  }, [config]);
+  }, [config ]);
 
   return (
     <>
       <Header />
-      {/* <>
-        {cart.map((p) => (
-          <CartImage
-            key={p._id}
-            name={p.name}
-            price={p.price}
-            imageLink={p.imageLink}
-            quantity={p.quantity}
-          />
-        ))}
-      </> */}
+
+      {cart?.map((p) => (
+        <CartImage
+          key={p._id}
+          name={p.name}
+          price={p.price}
+          imageLink={p.imageLink}
+          quantity={p.quantity}
+        />
+      ))}
     </>
   );
 }
