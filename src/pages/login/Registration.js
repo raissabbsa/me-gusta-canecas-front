@@ -16,21 +16,15 @@ export default function Registration() {
     function register(e) {
         e.preventDefault()
         setLoading(true)
-        
-        //if (form.password === form.confirmPassword) {
-            const promise = axios.post(`${URL}/sign-up`, form)
-            promise.then(res => {
-                navigate("/login")
-            })
-            promise.catch(err => {
-                alert(err.response.data.message)
-                setLoading(false)
-            })
-       /*  } else {
-            setLoading(false)
-            alert("As senhas precisam ser iguais")
-        } */
 
+        const promise = axios.post(`${URL}/sign-up`, form)
+        promise.then(res => {
+            navigate("/login")
+        })
+        promise.catch(err => {
+            alert(err.response.data.message)
+            setLoading(false)
+        })
     }
     return (
         <Container>

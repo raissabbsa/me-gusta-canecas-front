@@ -7,7 +7,7 @@ import Image from "./Image";
 import { URL } from "../../constants/urls";
 
 export default function MainPage() {
-  const { products, setProducts } = useContext(Context);
+  const { products, setProducts, config } = useContext(Context);
 
   useEffect(() => {
     const promise = axios.get(`${URL}/products`);
@@ -17,7 +17,7 @@ export default function MainPage() {
     promise.catch((err) => {
       console.log(err);
     });
-  },[setProducts]);
+  },[setProducts, config]);
 
   return (
     <>
