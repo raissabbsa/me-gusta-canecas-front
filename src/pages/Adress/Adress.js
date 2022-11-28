@@ -18,13 +18,13 @@ export default function Adress() {
     type: "",
   });
   const [loading, setLoading] = useState(false);
-  const [savedAdress, setSavedAdress] = useState({});
+  const {savedAdress, setSavedAdress} = useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {
     const promise = axios.get(`${process.env.REACT_APP_HOST}/adress`, config);
     promise.then((res) => {
-      console.log(res.data);
+
 
       setSavedAdress(res.data);
     });
@@ -47,7 +47,6 @@ export default function Adress() {
       config
     );
     promise.then((res) => {
-      console.log(res.data);
       navigate("/checkout");
     });
     promise.catch((err) => {
@@ -73,7 +72,7 @@ export default function Adress() {
             <Line>CEP: {savedAdress.postalCode}</Line>
             <Line>Tipo: {savedAdress.type}</Line>
           </div>
-          <Button to="/checkout">
+          <Button onClick={()=>navigate("/checkout")}>
             {loading ? "Carregando..." : "Checkout"}
           </Button>
         </Container>

@@ -1,39 +1,49 @@
-import axios from "axios";
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import Header from "../../components/Header";
 import Context from "../../contexts/Context";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ImageCheckout from "./ImageCheckout";
 
 export default function Checkout() {
-  const [cart, setCart] = useState();
-  const { config } = useContext(Context);
+  const navigate = useNavigate();
+  const { cart } = useContext(Context);
+  const { savedAdress } = useContext(Context);
 
-  useEffect(() => {
-    const promise = axios.get(`${process.env.REACT_APP_HOST}/cart`, config);
-    promise.then((res) => {
-      setCart(res.data);
-    });
-    promise.catch((err) => {
-      console.log(err);
-    });
-  }, [config]);
+  function finish() {
+    alert("Compra finalizada com sucesso!");
+  }
 
   return (
     <>
       <Header />
       <Container>
-        {cart?.map((p) => (
-          <Image key={p._id}>
-          <img src={p.imageLink} alt={p.name} />
+        <Products>
+          {cart?.map((p) => (
+            <ImageCheckout
+              key={p._id}
+              price={p.price}
+              imageLink={p.imageLink}
+              name={p.name}
+              quantity={p.quantity}
+            />
+          ))}
+        </Products>
+
+        <Adress>
+          <h1>Endereço de entrega</h1>
           <div>
-            <h1>{p.name}</h1>
-            <p>Qtd.: {p.quantity}</p>
+            <Line>Rua: {savedAdress.street}</Line>
+            <Line>Número: {savedAdress.number}</Line>
+            <Line>Complemento: {savedAdress.complement}</Line>
+            <Line>Bairro: {savedAdress.district}</Line>
+            <Line>Cidade: {savedAdress.city}</Line>
+            <Line>Estado: {savedAdress.state}</Line>
+            <Line>CEP: {savedAdress.postalCode}</Line>
+            <Line>Tipo: {savedAdress.type}</Line>
           </div>
-          <h2>R$ {p.price}</h2>
-          </Image>
-        ))}
-        <Button >Concluir compra?</Button>
+        </Adress>
+        <Button onClick={finish} to={"/"}>Concluir compra</Button>
       </Container>
     </>
   );
@@ -47,8 +57,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const Button = styled(Link)`
-  width: 150px;
+  width: 300px;
   height: 60px;
   background-color: #2d799e;
   border: none;
@@ -64,32 +75,19 @@ const Button = styled(Link)`
   align-items: center;
 `;
 
-const Image = styled.div`
-  width: 90%;
-  display: flex;
-  padding: 15px;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #2d799e;
-  border-radius: 5px;
-  margin: 5px 0;
-  img {
-    width: 90px;
-  }
-  p {
-    margin: 0 15px;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 0;
-    font-size: 13px;
-  }
+const Line = styled.p`
+  margin: 10px 0;
+`;
+const Adress = styled.div`
+  padding: 50px;
+  width: 100%;
   h1 {
     font-size: 20px;
-    padding: 5px 0;
-    font-weight: 700;
+    margin-bottom: 20px;
+    font-weight: 500;
   }
-  h2 {
-    font-size: 18px;
-    font-weight: 700;
-  }
+`;
+const Products = styled.div`
+  width: 100%;
+  padding: 0 50px 0 50px;
 `;
