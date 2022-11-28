@@ -7,18 +7,22 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export default function Cart() {
-  const [cart, setCart] = useState();
   const { config } = useContext(Context);
+  const { cart, setCart } = useContext(Context);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const promise = axios.get(`${process.env.REACT_APP_HOST}/cart`, config);
     promise.then((res) => {
       setCart(res.data);
+      setLoading(true);
+      console.log("res.data");
+      console.log(res.data);
     });
     promise.catch((err) => {
       console.log(err);
     });
-  }, [config]);
+  }, [config, setCart, cart]);
 
   return (
     <>
@@ -27,7 +31,8 @@ export default function Cart() {
         {cart?.map((p) => (
           <CartImage
             key={p._id}
-            id={p._id}
+            _id={p._id}
+            productId={p.productId}
             name={p.name}
             price={p.price}
             imageLink={p.imageLink}

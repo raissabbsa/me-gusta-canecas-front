@@ -16,11 +16,13 @@ export default function Adress() {
     const promise = axios.get(`${process.env.REACT_APP_HOST}/adress`, config);
     promise.then((res) => {
       setSavedAdress(res.data);
+      console.log(res.data);
     });
     promise.catch((err) => {
       console.log(err.response.data);
     });
-  }, []);
+  }, [config]);
+ 
 
   function fillForm(e) {
     setAdress({ ...adress, [e.target.name]: e.target.value });
@@ -45,9 +47,9 @@ export default function Adress() {
     });
   }
 
-  return (
-    (!savedAdress ? (
-    <>
+  if (savedAdress) {
+    return (
+      <>
       <Header />
       <Container>
         <h1>Endereço de entrega</h1>
@@ -64,7 +66,10 @@ export default function Adress() {
         <Button to="/checkout">{loading ? "Carregando..." : "Checkout"}</Button>
       </Container>
     </>
-  ) : (
+  )}
+  
+  if (!savedAdress) {
+    return (
     <>
       <Header />
       <Container>
@@ -140,7 +145,7 @@ export default function Adress() {
         </form>
       </Container>
     </>
-  )));
+  )};
 }
 
 const Container = styled.div`

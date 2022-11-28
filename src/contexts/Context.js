@@ -10,6 +10,7 @@ export function UserProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [image, setImage] = useState({});
   const [changeSection, setSection] = useState("");
+  const [cart, setCart] = useState();
 
   return (
     <Context.Provider
@@ -27,7 +28,9 @@ export function UserProvider({ children }) {
         image,
         setImage,
         changeSection, 
-        setSection
+        setSection,
+        cart,
+        setCart
       }}
     >
       {children}

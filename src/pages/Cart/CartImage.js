@@ -3,13 +3,13 @@ import axios from "axios";
 import { useContext } from "react";
 import Context from "../../contexts/Context";
 
-export default function CartImage({ id, name, price, imageLink, quantity }) {
+export default function CartImage({ _id, productId, name, price, imageLink, quantity }) {
   const { config } = useContext(Context);
+  const { cart, setCart } = useContext(Context);
 
   function removeProduct() {
     const promise = axios.delete(
-      `${process.env.REACT_APP_HOST}/cart/`,
-      { productId: id },
+      `${process.env.REACT_APP_HOST}/cart/${productId}`,
       config
     );
     promise.then((res) => {
@@ -29,7 +29,7 @@ export default function CartImage({ id, name, price, imageLink, quantity }) {
       </div>
       <h2>R$ {price}</h2>
 
-      <Button onClick={() => removeProduct(id)}>
+      <Button onClick={removeProduct}>
         Remover
         <br />
         do carrinho
