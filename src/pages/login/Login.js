@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Context from "../../contexts/Context";
 import axios from "axios";
-import { URL } from "../../constants/urls";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const { setUserInfo, setConfig } = useContext(Context);
+  const { userInfo, setUserInfo } = useContext(Context);
+  const { setConfig } = useContext(Context);
   const navigate = useNavigate();
 
   function fillForm(e) {
@@ -19,7 +19,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
 
-    const promise = axios.post(`${URL}/sign-in`, form);
+    const promise = axios.post(`${process.env.REACT_APP_HOST}/sign-in`, form);
     promise.then((res) => {
       setUserInfo(res.data);
       setConfig({
@@ -48,7 +48,7 @@ export default function Login() {
       });
       navigate("/");
     }
-    }, []);
+    }, [userInfo]);
 
   return (
     <ContainerLogin>

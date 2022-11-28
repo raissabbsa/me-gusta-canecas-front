@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../../contexts/Context";
-import { URL } from "../../constants/urls";
 import styled from "styled-components";
 import axios from "axios";
 import AdminHeader from "../../components/AdminHeader";
@@ -24,7 +23,7 @@ export default function AdminProducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const promise = axios.get(`${URL}/products`, adminConfig);
+    const promise = axios.get(`${process.env.REACT_APP_HOST}/products`, adminConfig);
 
     promise.then((res) => {
       setProducts(res.data);
@@ -43,7 +42,7 @@ export default function AdminProducts() {
     setLoading(true);
     console.log(addProductForm);
     const promise = axios.post(
-      `${URL}/add-product`,
+      `${process.env.REACT_APP_HOST}/add-product`,
       addProductForm,
       adminConfig
     );

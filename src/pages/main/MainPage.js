@@ -4,13 +4,14 @@ import styled from "styled-components";
 import Header from "../../components/Header";
 import Context from "../../contexts/Context";
 import Image from "./Image";
-import { URL } from "../../constants/urls";
+
 
 export default function MainPage() {
   const { products, setProducts, config } = useContext(Context);
 
   useEffect(() => {
-    const promise = axios.get(`${URL}/products`);
+    const promise = axios.get(`${process.env.REACT_APP_HOST}/products`);
+    console.log(process.env.REACT_APP_HOST)
     promise.then((res) => {
       setProducts(res.data);
     });
@@ -33,7 +34,7 @@ const Container = styled.div`
   padding: 100px 30px 0;
   flex-wrap: wrap;
   width: 90%;
-  margin: auto;
+  margin: 5px auto;
   display: flex;
   justify-content: center;
   align-items: center;

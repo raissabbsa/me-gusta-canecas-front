@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { URL } from "../../constants/urls";
 import Context from "../../contexts/Context";
 import Header from "../../components/Header";
 import styled from "styled-components";
@@ -12,10 +11,10 @@ export default function ImagePage() {
   const [quant, setQuant] = useState(1);
   const { imageId } = useParams();
   const { config, userInfo } = useContext(Context);
-  const cartForm = { productId: image._id, quantity: quant };
+  const cartForm = { productId: image._id, quantity: quant.toString() };
 
   useEffect(() => {
-    const promise = axios.get(`${URL}/products/${imageId}`);
+    const promise = axios.get(`${process.env.REACT_APP_HOST}/products/${imageId}`);
 
     promise.then((res) => {
       setImage(res.data);
@@ -24,7 +23,7 @@ export default function ImagePage() {
     promise.catch((err) => {
       console.log(err.response.data);
     });
-  });
+  },[]);
 
   function changeQuant(operator) {
     if (operator === "+") {
@@ -43,9 +42,11 @@ export default function ImagePage() {
       navigate("/login");
       return;
     } else {
-      const promise = axios.post(`${URL}/cart`, cartForm, config);
+      const promise = axios.post(`${process.env.REACT_APP_HOST}/cart`, cartForm, config);
       promise.then((res) => {
         alert(res.data);
+        console.log("cartForm in addToCart");
+        console.log(cartForm);
       });
       promise.catch((err) => {
         console.log(err);
@@ -100,7 +101,7 @@ export default function ImagePage() {
 }
 
 const Main = styled.div`
-  padding: 150px;
+  padding: 130px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -137,6 +138,8 @@ const ProductContainer = styled.div`
 const ImageContainer = styled.img`
   border-radius: 5px;
   width: 70%;
+  object-fit: cover;
+  padding: 10px;
 `;
 const InfoContainer = styled.div`
   justify-content: center;

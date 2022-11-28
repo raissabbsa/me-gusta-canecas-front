@@ -10,6 +10,7 @@ import { UserProvider } from "./contexts/Context";
 import ImagePage from "./pages/main/ImagePage";
 import Cart from "./pages/Cart/Cart";
 import ProductsSections from "./pages/main/ProductsSections";
+import Adress from "./pages/Cart/Adress";
 
 export default function App() {
   return (
@@ -22,10 +23,11 @@ export default function App() {
           <Route path="/cadastro" element={<Registration />} />
           <Route path="/produto/:imageId" element={<ImagePage />} />
           <Route path="/carrinho" element={<Cart />} />
+          <Route path="/carrinho/endereco" element={<Adress />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/cadastro" element={<AdminRegistration />} />
           <Route path="/admin/produtos" element={<AdminProducts />} />
-          <Route path="/:sections" element={<ProductsSections />} />
+          <Route path="/produtos/:sections" element={<ProductsSections />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>
