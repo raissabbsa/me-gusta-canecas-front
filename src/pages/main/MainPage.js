@@ -11,7 +11,6 @@ export default function MainPage() {
 
   useEffect(() => {
     const promise = axios.get(`${process.env.REACT_APP_HOST}/products`);
-    console.log(process.env.REACT_APP_HOST)
     promise.then((res) => {
       setProducts(res.data);
     });

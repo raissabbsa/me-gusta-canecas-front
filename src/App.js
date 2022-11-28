@@ -30,6 +30,7 @@ export default function App() {
           <Route path="/admin/cadastro" element={<AdminRegistration />} />
           <Route path="/admin/produtos" element={<AdminProducts />} />
           <Route path="/produtos/:sections" element={<ProductsSections />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>
