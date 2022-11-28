@@ -11,6 +11,7 @@ import ImagePage from "./pages/main/ImagePage";
 import Cart from "./pages/Cart/Cart";
 import ProductsSections from "./pages/main/ProductsSections";
 import Adress from "./pages/Cart/Adress";
+import Checkout from "./pages/Cart/Checkout";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/admin/cadastro" element={<AdminRegistration />} />
           <Route path="/admin/produtos" element={<AdminProducts />} />
           <Route path="/produtos/:sections" element={<ProductsSections />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>

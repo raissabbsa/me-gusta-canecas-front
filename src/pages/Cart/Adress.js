@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Adress() {
   const { config } = useContext(Context);
-  const [adress, setAdress] = useState({});
+  const [adress, setAdress] = useState({street:"", number:"", complement:"", postalCode:"", district:"", city:"", state:"", type:""});
   const [loading, setLoading] = useState(false);
   const [savedAdress, setSavedAdress] = useState({});
   const navigate = useNavigate();
@@ -15,7 +15,10 @@ export default function Adress() {
   useEffect(() => {
     const promise = axios.get(`${process.env.REACT_APP_HOST}/adress`, config);
     promise.then((res) => {
-      setSavedAdress(res.data);
+      if(res.data.length>0){
+        setSavedAdress(res.data);
+
+      }
     });
     promise.catch((err) => {
       console.log(err.response.data);
@@ -29,6 +32,7 @@ export default function Adress() {
   function registerAdress(e) {
     e.preventDefault();
     setLoading(true);
+    console.log(adress)
     const promise = axios.post(
       `${process.env.REACT_APP_HOST}/adress`,
       adress,
@@ -41,7 +45,7 @@ export default function Adress() {
     promise.catch((err) => {
       alert(err.response.data.message);
       console.log(err);
-      setLoading(true);
+      setLoading(false);
     });
   }
 
